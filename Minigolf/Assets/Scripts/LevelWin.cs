@@ -16,6 +16,8 @@ public class CylinderController : MonoBehaviour
         if (other.CompareTag("ball"))  // Asegúrate de que el cilindro tiene el tag "Cylinder"
         {
             Debug.Log("¡Trigger activado!");
+            Debug.Log("El objeto que entró al trigger es: " + other.name);
+            ScoreManager.Instance.AddPoint();
 
             score++;  // Sumar un punto
             scoreText.text = "Puntuación: " + score;  // Actualizar el texto de la puntuación
