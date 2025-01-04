@@ -18,6 +18,12 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Scene3");
     }
 
+    public void LoadRecordsScene()
+    {
+        SceneManager.LoadScene("RecordsScene");
+    }
+
+
     public void LoadMenu()
     {
         SceneManager.LoadScene("MenuScene");

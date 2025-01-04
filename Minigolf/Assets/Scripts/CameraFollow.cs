@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
 
         else if (scene == 2)
         {
-            if (ball.position == new Vector3(0, 0.0982986167f, 0))
+            if (ball.position == new Vector3(0, 0.09829862f, 0))
             {
 
                 currentAssetIndex = 0;

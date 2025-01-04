@@ -18,7 +18,6 @@ public class GolfClubPendulum : MonoBehaviour
     {
         time += Time.deltaTime;
         float zRotation = initialAngle + Mathf.Sin(time * speed) * angle;
-        Debug.Log("Z Rotation: " + zRotation); // Muestra los ángulos calculados.
         transform.rotation = Quaternion.Euler(0, 0, zRotation);
     }
 }

@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour
     public void AddPoint()
     {
         score++;
-        Debug.Log("Puntuación actual: " + score);
     }
 
     public int GetScore()

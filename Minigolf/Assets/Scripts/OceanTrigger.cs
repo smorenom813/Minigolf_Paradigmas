@@ -29,6 +29,7 @@ public class ResetPlane : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        
         // Detectar si el objeto que entra es la bola
         if (other.transform == ball)
         {
