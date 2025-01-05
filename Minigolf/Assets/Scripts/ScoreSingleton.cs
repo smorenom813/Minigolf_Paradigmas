@@ -34,4 +34,9 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         Debug.Log("Puntuación reiniciada.");
     }
+
+    public int GetCurrentScore()
+    {
+        return score; // Devuelve la puntuación actual.
+    }
 }

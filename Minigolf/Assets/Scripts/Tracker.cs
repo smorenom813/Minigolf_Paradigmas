@@ -5,15 +5,16 @@ public class Tracker : MonoBehaviour
 {
     public static Tracker Instance { get; private set; }
 
-    public TMP_Text strokeText;
+    public TMP_Text strokeText; // Texto para los golpes.
+    public TMP_Text timeText; // Texto para mostrar el tiempo.
+    public TMP_Text scoreText; // Texto para mostrar el puntaje.
+
     private int currentStrokes = 0; // Golpes actuales del nivel.
     public string levelName; // Nombre del nivel (para identificar los registros).
-    public TMP_Text timeText; // Texto UI para mostrar el tiempo.
+
     private float startTime; // Tiempo inicial del nivel.
     private float elapsedTime; // Tiempo transcurrido.
     private bool isTracking = false; // Controla si el temporizador está en marcha.
-
-
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class Tracker : MonoBehaviour
     private void Start()
     {
         StartTracking(); // Iniciar el temporizador al inicio del nivel.
+        UpdateScoreText(); // Mostrar el puntaje actual al inicio.
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class Tracker : MonoBehaviour
         {
             // Calcular el tiempo transcurrido.
             elapsedTime = Time.time - startTime;
-            timeText.text = $"Tiempo: {elapsedTime:F2} s"; // Mostrar el tiempo en la UI.
+            timeText.text = $"Time: {elapsedTime:F2}"; // Mostrar el tiempo en la UI.
         }
     }
 
@@ -54,8 +56,6 @@ public class Tracker : MonoBehaviour
         Debug.Log($"Temporizador iniciado en {levelName}");
     }
 
-
-
     public float GetElapsedTime()
     {
         return elapsedTime;
@@ -64,23 +64,30 @@ public class Tracker : MonoBehaviour
     private void AddStroke()
     {
         currentStrokes++;
-        strokeText.text  = $"Golpes : {currentStrokes.ToString()}";
+        strokeText.text = $"Strokes: {currentStrokes}";
     }
 
     public void EndHole()
     {
         // Enviar los golpes al GameManager al finalizar el hoyo.
-        GameManager.Instance.AddStatsForLevel(levelName, currentStrokes,elapsedTime);
+        GameManager.Instance.AddStatsForLevel(levelName, currentStrokes, elapsedTime);
         currentStrokes = 0; // Reiniciar para el siguiente hoyo.
         isTracking = false; // Detener el temporizador.
         Debug.Log($"Tiempo total en {levelName}: {elapsedTime:F2} segundos");
 
-        // Enviar el tiempo al GameManager al finalizar el nivel
-        strokeText.text = $"Golpes : {currentStrokes.ToString()}";
-        timeText.text = "Tiempo: 0.00 s"; // Reiniciar el texto en pantalla.
-        StartTracking();
+        // Actualizar el puntaje y reiniciar textos en pantalla.
+        UpdateScoreText();
+        strokeText.text = "Strokes: 0";
+        timeText.text = "Time: 0.00";
+        StartTracking(); // Iniciar el temporizador de nuevo.
     }
 
-
-
+    private void UpdateScoreText()
+    {
+        if (ScoreManager.Instance != null)
+        {
+            int currentScore = ScoreManager.Instance.GetCurrentScore(); // Obtener la puntuación del ScoreManager.
+            scoreText.text = $"Score: {currentScore}"; // Mostrar la puntuación en la UI.
+        }
+    }
 }
