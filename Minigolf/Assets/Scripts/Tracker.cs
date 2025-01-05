@@ -76,6 +76,7 @@ public class Tracker : MonoBehaviour
         Debug.Log($"Tiempo total en {levelName}: {elapsedTime:F2} segundos");
 
         // Enviar el tiempo al GameManager al finalizar el nivel
+        strokeText.text = $"Golpes : {currentStrokes.ToString()}";
         timeText.text = "Tiempo: 0.00 s"; // Reiniciar el texto en pantalla.
         StartTracking();
     }
